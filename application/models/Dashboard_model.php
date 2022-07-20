@@ -45,5 +45,12 @@ class Dashboard_model  extends CI_Model  {
         $result=$db->result();
         return $result; 
     }
+    function get_all_active_attached_product()                   
+    {       
+        $query="SELECT sum(user_products.quantity) as all_active_attached_product FROM `user_products` where user_products.id in (SELECT DISTINCT products.id from products where products.status = 1) "; 
+        $db=$this->db->query($query);
+        $result=$db->result();
+        return $result; 
+    }
 }
 ?>

@@ -8,7 +8,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |*/
 /* http://api.exchangeratesapi.io/v1/ */
 
-$config['exchangeratesapi_access_key'] = 'cee212a839adf0ce9f3cafc93f3f8890';    
+$config['exchangeratesapi_access_key'] = '';    
 
 
 /*

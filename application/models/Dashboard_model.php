@@ -13,7 +13,6 @@ class Dashboard_model  extends CI_Model  {
         $result=$db->result();
         return $result; 
     }
-
     function get_active_and_verified_usr_with_attached_prods()          
     {
         $query="SELECT distinct users.* FROM users, user_products, products 

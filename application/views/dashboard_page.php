@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <ul> 
                 <li> Active and verified users: <?php echo count($active_and_verified_users); ?></li>
                 <li> Active and verified users who have attached active products: <?php echo count($active_and_verified_usr_with_attached_prods); ?></li>
-                <li> All active products: 00</li>
+                <li> All active products: <?php echo count($active_products); ?></li>      
                 <li> Active products which don't belong to any user: 00</li>
                 <li> Amount of all active attached products: 00</li>
                 <li> Summarized price of all active attached products: 00</li>

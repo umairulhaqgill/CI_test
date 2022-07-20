@@ -89,8 +89,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li> All active products: <?php echo count($active_products); ?></li>      
                 <li> Active products which don't belong to any user: <?php echo count($active_products_do_not_belong_to_any_user); ?></li>
                 <li> Amount of all active attached products: <?php echo ($all_active_attached_product); ?></li>    
-                <li> Summarized price of all active attached products: <?php echo number_format($summarized_price_of_all_active_attached_products,2); ?></li>
-                <li> Summarized prices of all active products per user: 00</li>
+                <li> Summarized price of all active attached products: <?php echo number_format($summarized_price_of_all_active_attached_products,0); ?></li>
+                <li> 
+                    <h4>Summarized prices of all active products per user</h4>
+                    <ul> 
+                        <?php foreach($summarized_prices_all_active_products_per_user as $key=>$val) 
+                        {   
+                            ?><li><?php echo $key; ?>: &nbsp; <?php echo number_format($val,0); ?></li><?php
+                        }
+                        ?>
+                    </ul>
+                </li>
                 <li> The exchange rates for USD and RON based on Euro: 00</li>
                 <li> Summarized prices of all active products per user: 00</li> 
             </ul>            

@@ -22,8 +22,7 @@ class Dashboard extends CI_Controller {
 	{    
       $this->load->model('Dashboard_model');
 
-      $data['exchange_rates'] = $this->exchange_rates();    
-
+      $data['exchange_rates'] = $this->exchange_rates();   
       $data['active_and_verified_users'] = $this->Dashboard_model->get_active_and_verified_users();     
       $data['active_and_verified_usr_with_attached_prods'] = $this->Dashboard_model->get_active_and_verified_usr_with_attached_prods();
       $data['active_products'] = $this->Dashboard_model->get_active_products(); 
@@ -35,20 +34,26 @@ class Dashboard extends CI_Controller {
 	}   
 
     private function exchange_rates()
-    {
+    {   
+        $return = array();
         $endpoint = 'latest';
         $access_key = $this->config->item('exchangeratesapi_access_key'); 
-        
+        if(!trim($access_key))
+        {
+            $return['status'] = 0; 
+            $return['message'] = 'Please update API key in config.php';
+        }
         $ch = curl_init('http://api.exchangeratesapi.io/v1/'.$endpoint.'?access_key='.$access_key);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 
         // Store the data:  
         $json = curl_exec($ch);
         curl_close($ch);
-        $exchangeRates = json_decode($json, true);
-        if($exchangeRates['rates'])
+        $return['exchangeRates'] = json_decode($json, true);
+        if(isset($return['exchangeRates']['rates']))
         {
-            return $exchangeRates['rates']; 
+            $return['status'] = 1; 
         }
+        return $return; 
     }
 }

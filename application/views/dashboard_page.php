@@ -103,8 +103,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                 <li>
                     <h4>Exchange rates for USD and RON based on Euro</h4>
                     <ul>  
-                        <li> EUR to USD: &nbsp; <?php echo $exchange_rates['USD']; ?> </li>
-                        <li> EUR to RON: &nbsp; <?php echo $exchange_rates['RON']; ?> </li>
+                        <?php
+                        if(isset($exchange_rates['status']) && $exchange_rates['status'] == 1)
+                        {
+                            ?>
+                                <li> EUR to USD: &nbsp; <?php echo $exchange_rates['exchangeRates']['rates']['USD']; ?> </li>
+                                <li> EUR to RON: &nbsp; <?php echo $exchange_rates['exchangeRates']['rates']['RON']; ?> </li>
+                            <?php
+                        }
+                        else
+                        {
+                            ?>
+                                <li> EUR to USD: &nbsp; <?php echo $exchange_rates['message']; ?> </li>  
+                            <?php
+                        }
+                        ?>
+                        
                     </ul>
                 </li>
      

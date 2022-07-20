@@ -100,8 +100,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                         ?>
                     </ul>
                 </li>
-                <li> The exchange rates for USD and RON based on Euro: 00</li>
-                <li> Summarized prices of all active products per user: 00</li> 
+                <li>
+                    <h4>Exchange rates for USD and RON based on Euro</h4>
+                    <ul>  
+                        <li> EUR to USD: &nbsp; <?php echo $exchange_rates['USD']; ?> </li>
+                        <li> EUR to RON: &nbsp; <?php echo $exchange_rates['RON']; ?> </li>
+                    </ul>
+                </li>
+     
             </ul>            
         </p>
     </div>

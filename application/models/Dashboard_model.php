@@ -53,12 +53,29 @@ class Dashboard_model  extends CI_Model  {
         return $result; 
     }
 
-    function get_summarized_price_of_all_active_attached_products()                   
+    function get_summarized_price_of_all_active_attached_products($user_id='')                   
     {               
-        $query="SELECT sum(user_products.quantity*user_products.Item_price) as summarized_price_of_all_active_attached_products  FROM `user_products` where user_products.id in (SELECT DISTINCT products.id from products where products.status = 1) "; 
+        $query="SELECT sum(user_products.quantity*user_products.Item_price) 
+                    as summarized_price_of_all_active_attached_products  
+                        FROM `user_products` 
+                        where user_products.id 
+                            in (SELECT DISTINCT products.id from products where products.status = 1) 
+                        "; 
+        $query .= (trim($user_id) ? ' and `user_products`.user_id = '.$user_id : '');   
         $db=$this->db->query($query);
         $result=$db->result();
         return $result; 
+    }
+
+    function get_summarized_prices_all_active_products_per_user()
+    {
+        $out_put = array();
+        $users = $this->get_active_and_verified_usr_with_attached_prods();
+        foreach($users as $k)
+        {   
+            $out_put[$k->name] = $this->get_summarized_price_of_all_active_attached_products($k->user_id)[0]->summarized_price_of_all_active_attached_products; 
+        }  
+        return $out_put; 
     }
 }
 ?>

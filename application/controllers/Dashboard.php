@@ -24,7 +24,8 @@ class Dashboard extends CI_Controller {
       //echo '<pre>';
       $data['active_and_verified_users'] = $this->Dashboard_model->get_active_and_verified_users();     
       $data['active_and_verified_usr_with_attached_prods'] = $this->Dashboard_model->get_active_and_verified_usr_with_attached_prods();
-      $data['active_products'] = $this->Dashboard_model->get_active_products();         
+      $data['active_products'] = $this->Dashboard_model->get_active_products(); 
+      $data['active_products_do_not_belong_to_any_user'] = $this->Dashboard_model->get_active_products_do_not_belong_to_any_user();        
       $this->load->view('dashboard_page',$data);
 	}   
 }

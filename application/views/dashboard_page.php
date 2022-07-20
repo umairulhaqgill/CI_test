@@ -84,7 +84,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<div id="body">
 		<p>
             <ul>
-                <li> Active and verified users: 00</li>
+                <li> Active and verified users: <?php echo count($active_and_verified_users); ?></li>
                 <li> Active and verified users who have attached active products: 00</li>
                 <li> All active products: 00</li>
                 <li> Active products which don't belong to any user: 00</li>

@@ -19,7 +19,10 @@ class Dashboard extends CI_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 	public function index()
-	{
-		$this->load->view('dashboard_page');
+	{   
+        $this->load->model('Dashboard_model');	        
+        $this->db->select_sum('age'); 
+        $data['active_and_verified_users'] = $this->Dashboard_model->get_active_and_verified_users();        
+		$this->load->view('dashboard_page',$data);
 	}   
 }

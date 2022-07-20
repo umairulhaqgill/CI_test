@@ -52,5 +52,13 @@ class Dashboard_model  extends CI_Model  {
         $result=$db->result();
         return $result; 
     }
+
+    function get_summarized_price_of_all_active_attached_products()                   
+    {               
+        $query="SELECT sum(user_products.quantity*user_products.Item_price) as summarized_price_of_all_active_attached_products  FROM `user_products` where user_products.id in (SELECT DISTINCT products.id from products where products.status = 1) "; 
+        $db=$this->db->query($query);
+        $result=$db->result();
+        return $result; 
+    }
 }
 ?>

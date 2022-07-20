@@ -26,7 +26,8 @@ class Dashboard extends CI_Controller {
       $data['active_and_verified_usr_with_attached_prods'] = $this->Dashboard_model->get_active_and_verified_usr_with_attached_prods();
       $data['active_products'] = $this->Dashboard_model->get_active_products(); 
       $data['active_products_do_not_belong_to_any_user'] = $this->Dashboard_model->get_active_products_do_not_belong_to_any_user();        
-      $data['all_active_attached_product'] = ($this->Dashboard_model->get_all_active_attached_product()[0]->all_active_attached_product?$this->Dashboard_model->get_all_active_attached_product()[0]->all_active_attached_product:0);           
-      $this->load->view('dashboard_page',$data);
+      $data['all_active_attached_product'] = ($this->Dashboard_model->get_all_active_attached_product()[0]->all_active_attached_product?$this->Dashboard_model->get_all_active_attached_product()[0]->all_active_attached_product:0);  
+      $data['summarized_price_of_all_active_attached_products'] = ($this->Dashboard_model->get_summarized_price_of_all_active_attached_products()[0]->summarized_price_of_all_active_attached_products?$this->Dashboard_model->get_summarized_price_of_all_active_attached_products()[0]->summarized_price_of_all_active_attached_products:0);         
+      $this->load->view('dashboard_page',$data);    
 	}   
 }

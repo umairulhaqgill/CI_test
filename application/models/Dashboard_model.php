@@ -31,5 +31,12 @@ class Dashboard_model  extends CI_Model  {
         $result=$db->result();
         return $result; 
     }
+    function get_active_products()            
+    {
+        $query="SELECT * FROM products WHERE status='1' "; 
+        $db=$this->db->query($query);
+        $result=$db->result();
+        return $result; 
+    }
 }
 ?>

@@ -19,9 +19,11 @@ class Dashboard extends CI_Controller {
 	 * @see https://codeigniter.com/userguide3/general/urls.html
 	 */
 	public function index()
-	{   
-      $this->load->model('Dashboard_model');	        
-      //echo '<pre>';
+	{    
+      $this->load->model('Dashboard_model');
+
+      $data['exchange_rates'] = $this->exchange_rates();    
+
       $data['active_and_verified_users'] = $this->Dashboard_model->get_active_and_verified_users();     
       $data['active_and_verified_usr_with_attached_prods'] = $this->Dashboard_model->get_active_and_verified_usr_with_attached_prods();
       $data['active_products'] = $this->Dashboard_model->get_active_products(); 
@@ -31,4 +33,22 @@ class Dashboard extends CI_Controller {
       $data['summarized_prices_all_active_products_per_user'] = $this->Dashboard_model->get_summarized_prices_all_active_products_per_user();    
       $this->load->view('dashboard_page',$data);        
 	}   
+
+    private function exchange_rates()
+    {
+        $endpoint = 'latest';
+        $access_key = $this->config->item('exchangeratesapi_access_key'); 
+        
+        $ch = curl_init('http://api.exchangeratesapi.io/v1/'.$endpoint.'?access_key='.$access_key);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+
+        // Store the data:  
+        $json = curl_exec($ch);
+        curl_close($ch);
+        $exchangeRates = json_decode($json, true);
+        if($exchangeRates['rates'])
+        {
+            return $exchangeRates['rates']; 
+        }
+    }
 }
